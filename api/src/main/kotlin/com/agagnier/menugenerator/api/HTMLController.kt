@@ -5,11 +5,7 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-class RootController {
-    init {
-        println("Controller Initiliazed")
-    }
-
+class HTMLController {
     @GetMapping(produces = ["text/html"])
     fun getApp() = "<html><body>Allo ma boi</body></html>";
 

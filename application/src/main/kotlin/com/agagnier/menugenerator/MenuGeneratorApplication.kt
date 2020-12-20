@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class MenuGeneratorApplication
 
 fun main(args: Array<String>) {
-	runApplication<MenuGeneratorApplication>(*args)
+    runApplication<MenuGeneratorApplication>(*args)
 }
