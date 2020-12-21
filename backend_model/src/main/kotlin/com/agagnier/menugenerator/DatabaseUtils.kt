@@ -12,7 +12,7 @@ fun createDatabase(): Database {
     return Database.connect(url)
 }
 
-fun doInTransaction(content: () -> Unit) {
+fun debugTransaction(content: () -> Unit) {
     transaction {
         addLogger(StdOutSqlLogger)
         content()
