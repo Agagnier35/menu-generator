@@ -1,18 +1,18 @@
 package com.agagnier.menugenerator.api.ressources
 
+import com.agagnier.menugenerator.backend.dto.UserDto
+import com.agagnier.menugenerator.backend.services.UsersService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
 @RequestMapping("/api/users")
-class ExempleAPIRessource {
-    init {
-        println("base scanned")
-    }
+class ExempleAPIRessource @Autowired constructor(private val userService: UsersService) {
 
-    @GetMapping("/{id}", produces = ["application/json"])
-    fun getUserWithID(@PathVariable id: String): String = "{\"name\": \"${id}\"}"
+
+    @GetMapping("/", produces = ["application/json"])
+    fun getUsers(): List<UserDto> = userService.getAllUsers();
 }

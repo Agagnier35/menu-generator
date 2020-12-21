@@ -20,6 +20,8 @@
 	<modules>
 		<module>api</module>
 		<module>application</module>
+		<module>backend_model</module>
+		<module>backend</module>
 	</modules>
 
 	<properties>
