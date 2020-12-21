@@ -1,12 +1,16 @@
 package com.agagnier.menugenerator.api
 
+import org.springframework.http.MediaType
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RestController
+import javax.servlet.http.HttpServletResponse
 
 
-@RestController
+@Controller
 class HTMLController {
-    @GetMapping(produces = ["text/html"])
-    fun getApp() = "<html><body>Allo ma boi</body></html>";
-
+    @GetMapping(produces = [MediaType.TEXT_HTML_VALUE])
+    fun getApp(response: HttpServletResponse): String {
+        response.setHeader("Cache-Control", "no-store")
+        return "index.html"
+    }
 }

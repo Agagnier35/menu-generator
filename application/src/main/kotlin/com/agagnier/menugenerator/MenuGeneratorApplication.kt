@@ -8,5 +8,5 @@ class MenuGeneratorApplication
 
 fun main(args: Array<String>) {
     runApplication<MenuGeneratorApplication>(*args)
-    createDatabase();
+    createDatabase()
 }
