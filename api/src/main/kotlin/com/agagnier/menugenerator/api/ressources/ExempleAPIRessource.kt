@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController
 class ExempleAPIRessource @Autowired constructor(private val userService: UsersService) {
 
 
-    @GetMapping("/", produces = ["application/json"])
+    @GetMapping(produces = ["application/json"])
     fun getUsers(): List<UserDto> = userService.getAllUsers();
+
+    @GetMapping("/test", produces = ["application/json"])
+    fun getUserTest(): String = "test";
 }

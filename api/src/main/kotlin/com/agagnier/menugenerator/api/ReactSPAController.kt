@@ -8,5 +8,7 @@ import org.springframework.web.servlet.NoHandlerFoundException
 @ControllerAdvice
 class ReactSPAController {
     @ExceptionHandler(NoHandlerFoundException::class)
-    fun handleError404(): String = "index.html"
+    fun handleError404(ex: NoHandlerFoundException): Any {
+        return "/index.html"
+    }
 }

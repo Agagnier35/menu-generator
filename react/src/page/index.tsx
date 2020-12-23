@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import Page404 from './404';
 import MainPage from './main-page';
 import SecondPage from './second-page';
 
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path="/" exact>
                         <MainPage />
                     </Route>
+                    <Route render={() => <Page404 />} />
                 </Switch>
             </div>
         </Router>

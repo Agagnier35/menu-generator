@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver
 open class ReactConfiguration : WebMvcConfigurer {
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry.addResourceHandler("/index.html").addResourceLocations("classpath:/static/index.html")
-        registry.addResourceHandler("/*.js").addResourceLocations("classpath:/static/")
+        registry.addResourceHandler("/*.*").addResourceLocations("classpath:/static/")
         super.addResourceHandlers(registry)
     }
 
