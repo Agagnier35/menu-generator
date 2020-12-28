@@ -13,6 +13,9 @@ module.exports = {
         filename: '[name].js',
         path: path.resolve(__dirname, '../public'),
     },
+    stats: {
+        warningsFilter: [/Failed to parse source map/],
+    },
     optimization: {
         moduleIds: 'hashed',
         runtimeChunk: 'single',

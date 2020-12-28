@@ -1,33 +1,33 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
 import Page404 from './404';
-import MainPage from './main-page';
-import SecondPage from './second-page';
+import HomePage from './home';
+import RecipesPage from './recipe';
+import { GlobalStyle, Nav } from './style';
 
 const App = () => {
     return (
         <Router>
-            <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Main</Link>
-                        </li>
-                        <li>
-                            <Link to="/second">Second</Link>
-                        </li>
-                    </ul>
-                </nav>
-                <Switch>
-                    <Route path="/second">
-                        <SecondPage />
-                    </Route>
-                    <Route path="/" exact>
-                        <MainPage />
-                    </Route>
-                    <Route render={() => <Page404 />} />
-                </Switch>
-            </div>
+            <GlobalStyle />
+            <Nav>
+                <ul>
+                    <li>
+                        <NavLink to="/">Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/recipes">Recipes</NavLink>
+                    </li>
+                </ul>
+            </Nav>
+            <Switch>
+                <Route path="/recipes">
+                    <RecipesPage />
+                </Route>
+                <Route path="/" exact>
+                    <HomePage />
+                </Route>
+                <Route render={() => <Page404 />} />
+            </Switch>
         </Router>
     );
 };
