@@ -8,15 +8,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UsersService {
-    fun getAllUsers(): List<UserDto> {
-
-        var users = listOf<UserDto>()
-        transaction {
-            users = User.all().map { toUserDto(it) }
-        }
-
-        return users;
-    }
+    fun getAllUsers(): List<UserDto> = transaction { User.all().map { toUserDto(it) } }
 }
 
 
