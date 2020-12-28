@@ -37,4 +37,10 @@ class RecipeResource @Autowired constructor(private val recipeService: RecipesSe
 
         return ResponseEntity.status(HttpStatus.CREATED).body(recipeService.createRecipe(recipeName, origin, imgURL));
     }
+
+    @DeleteMapping(value = ["/{recipeId}"])
+    fun deleteRecipe(@PathVariable recipeId: Int): ResponseEntity<Unit> =
+        if (recipeService.deleteRecipe(recipeId) { url -> cloudinaryService.deleteImage(url) }) ResponseEntity.noContent().build()
+        else ResponseEntity.notFound().build()
+
 }

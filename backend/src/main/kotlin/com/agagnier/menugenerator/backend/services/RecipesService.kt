@@ -19,4 +19,13 @@ class RecipesService {
                 thumbnail = imgURL
             })
         }
+
+    fun deleteRecipe(recipeId: Int, deleteImg: (String) -> Boolean): Boolean =
+        transaction {
+            Recipe.findById(recipeId)?.let { it ->
+                it.thumbnail?.let(deleteImg)
+                it.delete()
+                true
+            } ?: false
+        }
 }
