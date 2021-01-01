@@ -6,21 +6,22 @@ import { StepContainer, StepDescriptionInput } from './style';
 
 interface StepCompProps {
     step: Step;
-    onChange(i: Step): void;
-    edit: boolean;
+    onChange?(i: Step): void;
+    edit?: boolean;
 }
 
 const StepComp = ({ step, onChange, edit }: StepCompProps) => {
     return (
         <StepContainer>
             {step.stepNumber}
+            {': '}
             {edit ? (
                 <FormFieldInline valid fieldId={`${step.stepId}-desc`}>
                     <StepDescriptionInput
                         id={`${step.stepId}-desc`}
                         value={step.description}
                         onChange={(e) =>
-                            onChange(
+                            onChange?.(
                                 produce(step, (draft) => {
                                     draft.description = e.target.value;
                                 }),

@@ -6,6 +6,7 @@ import 'reflect-metadata';
 import Page404 from './404';
 import HomePage from './home';
 import RecipesPage from './recipe';
+import EditRecipePage from './recipe/edit';
 import NewRecipePage from './recipe/new';
 import { GlobalStyle, Nav } from './style';
 
@@ -32,6 +33,7 @@ const App = () => {
                 <Route path="/recipes/new">
                     <NewRecipePage />
                 </Route>
+                <Route path="/recipes/:recipeId" component={EditRecipePage} />
                 <Route path="/recipes">
                     <RecipesPage />
                 </Route>

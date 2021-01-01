@@ -1,4 +1,6 @@
 import { immerable } from 'immer';
+import { Ingredient } from './ingredient';
+import Step from './step';
 
 export default class Recipe {
     [immerable] = true;
@@ -7,6 +9,6 @@ export default class Recipe {
     public name: string = '';
     public origin?: string;
     public thumbnail?: string;
-    // public ingredients: Ingredient[] = [];
-    // public steps: Step[] = [];
+    public ingredients: Ingredient[] = [];
+    public steps: Step[] = [];
 }

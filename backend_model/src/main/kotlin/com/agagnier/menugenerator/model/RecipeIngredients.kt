@@ -9,7 +9,7 @@ object RecipeIngredients : IntIdTable("recipeingredients", "recipeIngredientid")
     val recipeid = reference("recipeId", Recipes.id)
     val ingredientid = reference("ingredientId", Ingredients.id)
 
-    val quantity = integer("quantity")
+    val quantity = float("quantity")
     val unit = varchar("unit", 5)
 
     val section = varchar("section", 255).nullable()

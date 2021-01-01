@@ -6,8 +6,8 @@ import { EditIngredientWrapper } from './style';
 
 interface IngredientCompProps {
     ingredient: Ingredient;
-    onChange(i: Ingredient): void;
-    edit: boolean;
+    onChange?(i: Ingredient): void;
+    edit?: boolean;
 }
 
 const IngredientComp = ({ ingredient, onChange, edit }: IngredientCompProps) => {
@@ -18,7 +18,7 @@ const IngredientComp = ({ ingredient, onChange, edit }: IngredientCompProps) => 
                 value={ingredient.quantity}
                 type="number"
                 onChange={(e) =>
-                    onChange(
+                    onChange?.(
                         produce(ingredient, (draft) => {
                             draft.quantity = e.target.valueAsNumber;
                         }),
@@ -29,7 +29,7 @@ const IngredientComp = ({ ingredient, onChange, edit }: IngredientCompProps) => 
                 label="Unit: "
                 value={ingredient.unit}
                 onChange={(e) =>
-                    onChange(
+                    onChange?.(
                         produce(ingredient, (draft) => {
                             draft.unit = e.target.value;
                         }),
@@ -40,7 +40,7 @@ const IngredientComp = ({ ingredient, onChange, edit }: IngredientCompProps) => 
                 label="Name: "
                 value={ingredient.name}
                 onChange={(e) =>
-                    onChange(
+                    onChange?.(
                         produce(ingredient, (draft) => {
                             draft.name = e.target.value;
                         }),
