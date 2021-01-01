@@ -20,4 +20,5 @@ class RecipeStep(stepId: EntityID<Int>) : IntEntity(stepId) {
     var order by RecipeSteps.order
     var description by RecipeSteps.description
     var section by RecipeSteps.section
+    var recipe by Recipe referencedOn RecipeSteps.recipeid
 }

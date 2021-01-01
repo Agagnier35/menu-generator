@@ -1,9 +1,21 @@
 import React, { ReactNode } from 'react';
-import { CardContainer, CardContent } from './style';
+import { CardContainer, CardContent, CardTitle } from './style';
 
-const Card = ({ children, onClick }: { children: ReactNode; onClick?(): void }) => {
+interface CardProps {
+    children?: ReactNode;
+    onClick?(): void;
+    title?: string;
+    actions?: ReactNode;
+}
+const Card = ({ children, onClick, title, actions }: CardProps) => {
     return (
         <CardContainer onClick={onClick}>
+            {(title || actions) && (
+                <CardTitle>
+                    <h2>{title}</h2>
+                    {actions}
+                </CardTitle>
+            )}
             <CardContent>{children}</CardContent>
         </CardContainer>
     );

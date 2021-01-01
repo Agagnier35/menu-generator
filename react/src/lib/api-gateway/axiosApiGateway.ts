@@ -4,7 +4,7 @@ import axios, { AxiosInstance } from 'axios';
 import { ApiGateway, TypeOptions } from './apiGateway';
 import { JsonSerializer } from './jsonSerializer';
 
-export type HeaderType = 'application/json' | 'application/octet-stream' | 'application/vnd.ms-excel' | 'text/plain';
+export type HeaderType = 'application/json' | 'application/octet-stream' | 'multipart/form-data' | 'text/plain';
 const DEV_URL = 'http://localhost:8080';
 const API_SUFFIX = '/api';
 

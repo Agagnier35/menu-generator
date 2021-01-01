@@ -1,6 +1,8 @@
 package com.agagnier.menugenerator.api.ressources.recipe
 
+import com.agagnier.menugenerator.backend.dto.IngredientDto
 import com.agagnier.menugenerator.backend.dto.RecipeDto
+import com.agagnier.menugenerator.backend.dto.StepDto
 import com.agagnier.menugenerator.backend.services.CloudinaryService
 import com.agagnier.menugenerator.backend.services.RecipesService
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,7 +28,11 @@ class RecipeResource @Autowired constructor(private val recipeService: RecipesSe
     }
 
     @PostMapping(produces = [MediaType.APPLICATION_JSON_VALUE], consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
-    fun createRecipe(@RequestParam thumbnail: MultipartFile?, @RequestParam recipeName: String, @RequestParam origin: String?): ResponseEntity<RecipeDto> {
+    fun createRecipe(
+        @RequestParam thumbnail: MultipartFile?,
+        @RequestParam recipeName: String,
+        @RequestParam recipeOrigin: String?
+    ): ResponseEntity<RecipeDto> {
         var imgURL: String? = null
         if (thumbnail != null) {
             val imgTmpFile = File.createTempFile("thumbnail-", ".tmp")
@@ -35,12 +41,20 @@ class RecipeResource @Autowired constructor(private val recipeService: RecipesSe
             imgTmpFile.deleteOnExit()
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(recipeService.createRecipe(recipeName, origin, imgURL));
+        return ResponseEntity.status(HttpStatus.CREATED).body(recipeService.createRecipe(recipeName, recipeOrigin, imgURL));
     }
 
     @DeleteMapping(value = ["/{recipeId}"])
     fun deleteRecipe(@PathVariable recipeId: Int): ResponseEntity<Unit> =
         if (recipeService.deleteRecipe(recipeId) { url -> cloudinaryService.deleteImage(url) }) ResponseEntity.noContent().build()
         else ResponseEntity.notFound().build()
+
+    @PostMapping(value = ["/{recipeId}/steps"])
+    fun addSteps(@PathVariable recipeId: Int, @RequestBody steps: List<StepDto>): ResponseEntity<List<StepDto>> =
+        ResponseEntity.status(HttpStatus.CREATED).body(recipeService.addSteps(recipeId, steps))
+
+    @PostMapping(value = ["/{recipeId}/ingredients"])
+    fun addIngredients(@PathVariable recipeId: Int, @RequestBody ings: List<IngredientDto>): ResponseEntity<List<IngredientDto>> =
+        ResponseEntity.status(HttpStatus.CREATED).body(recipeService.addIngredients(recipeId, ings))
 
 }

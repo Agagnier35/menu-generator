@@ -1,8 +1,10 @@
 package com.agagnier.menugenerator.backend.services
 
-import com.agagnier.menugenerator.backend.dto.RecipeDto
-import com.agagnier.menugenerator.backend.dto.toRecipeDto
+import com.agagnier.menugenerator.backend.dto.*
+import com.agagnier.menugenerator.model.Ingredient
 import com.agagnier.menugenerator.model.Recipe
+import com.agagnier.menugenerator.model.RecipeIngredient
+import com.agagnier.menugenerator.model.RecipeStep
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Service
 
@@ -28,4 +30,32 @@ class RecipesService {
                 true
             } ?: false
         }
+
+    fun addSteps(recipeId: Int, steps: List<StepDto>): List<StepDto> =
+        transaction {
+            steps.map {
+                RecipeStep.new {
+                    recipe = Recipe.findById(recipeId)!!
+                    order = it.stepNumber
+                    description = it.description
+                    section = it.section
+                }
+            }.map { toStepDto(it) }
+        }
+
+    fun addIngredients(recipeId: Int, ings: List<IngredientDto>): List<IngredientDto> =
+        transaction {
+            ings.map {
+                RecipeIngredient.new {
+                    recipe = Recipe.findById(recipeId)!!
+                    ingredient = Ingredient.new {
+                        name = it.name
+                    }
+                    quantity = it.quantity
+                    unit = it.unit
+                    section = it.section
+                }
+            }.map { toIngredientDto(it) }
+        }
+
 }

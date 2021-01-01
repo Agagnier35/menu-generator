@@ -18,7 +18,8 @@ object RecipeIngredients : IntIdTable("recipeingredients", "recipeIngredientid")
 class RecipeIngredient(recipeIngredientId: EntityID<Int>) : IntEntity(recipeIngredientId) {
     companion object : IntEntityClass<RecipeIngredient>(RecipeIngredients)
 
-    val ingredient by Ingredient referencedOn Ingredients.id
+    var ingredient by Ingredient referencedOn RecipeIngredients.ingredientid
+    var recipe by Recipe referencedOn RecipeIngredients.recipeid
     var quantity by RecipeIngredients.quantity
     var unit by RecipeIngredients.unit
     var section by RecipeIngredients.section
